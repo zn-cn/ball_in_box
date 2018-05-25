@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import math
 
 
 def validate(circles, blockers):
@@ -25,20 +24,21 @@ def validate(circles, blockers):
                 r = circle[2]
                 bx = block[0]
                 by = block[1]
-                if math.sqrt((x - bx)**2 + (y - by)**2) < r:
+                if (x - bx)**2 + (y - by)**2 < r**2:
                     return False
 
     # Is circle good for each other?
-    for circle1 in circles:
-        for circle2 in circles:
-            x1 = circle1[0]
-            y1 = circle1[0]
-            r1 = circle1[0]
-            x2 = circle2[0]
-            y2 = circle2[0]
-            r2 = circle2[0]
-            if math.sqrt((x1 - x2)**2 + (y1 - y2)**2) < (r1 + r2):
-                return False
+    for index1, value1 in enumerate(circles):
+        for index2, value2 in enumerate(circles):
+            if index1 != index2:
+                x1 = value1[0]
+                y1 = value1[0]
+                r1 = value1[0]
+                x2 = value2[0]
+                y2 = value2[0]
+                r2 = value2[0]
+                if (x1 - x2)**2 + (y1 - y2)**2 < (r1 + r2)**2:
+                    return False
 
     # all good
     return True

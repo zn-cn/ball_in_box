@@ -12,11 +12,19 @@ def area_sum(circles):
     return area
 
 
+def print_circles(circles):
+    for item in circles:
+        print("(x, y) -> (", item[0], ", ", item[1], "),", " r -> ", item[2])
+    print("\n")
+
+
 if __name__ == '__main__':
     num_of_circle = 5
     blockers = [(0.5, 0.5), (0.5, -0.3)]
 
     circles = bb.ball_in_box(num_of_circle, blockers)
+    print("circles: ")
+    print_circles(circles)
 
     if num_of_circle == len(circles) and val.validate(circles, blockers):
         area = area_sum(circles)
