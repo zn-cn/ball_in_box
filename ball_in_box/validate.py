@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
+import config
 
 
 def validate(circles, blockers):
+    xrange = config.XRANGE
+    yrange = config.YRANGE
     # Is circle in the box?
     for circle in circles:
         xmr = circle[0] - circle[2]
@@ -9,10 +12,10 @@ def validate(circles, blockers):
         ymr = circle[1] - circle[2]
         ypr = circle[1] + circle[2]
 
-        if not xmr <= 1 and xmr >= -1  \
-           or not xpr <= 1 and xpr >= -1 \
-           or not ymr <= 1 and ymr >= -1  \
-           or not ypr <= 1 and ypr >= -1:
+        if not xmr <= xrange[1] and xmr >= xrange[0]  \
+           or not xpr <= xrange[1] and xpr >= xrange[0] \
+           or not ymr <= yrange[1] and ymr >= yrange[0]  \
+           or not ypr <= yrange[1] and ypr >= yrange[0]:
             return False
 
     # Is circle good for blockers?
@@ -24,7 +27,8 @@ def validate(circles, blockers):
                 r = circle[2]
                 bx = block[0]
                 by = block[1]
-                if (x - bx)**2 + (y - by)**2 < r**2:
+                # 由于浮点运算存在精度问题，所以设置 一个误差范围 1e-8
+                if (x - bx)**2 + (y - by)**2 < (r**2 - 1e-8):
                     return False
 
     # Is circle good for each other?
@@ -32,12 +36,13 @@ def validate(circles, blockers):
         for index2, value2 in enumerate(circles):
             if index1 != index2:
                 x1 = value1[0]
-                y1 = value1[0]
-                r1 = value1[0]
+                y1 = value1[1]
+                r1 = value1[2]
                 x2 = value2[0]
-                y2 = value2[0]
-                r2 = value2[0]
-                if (x1 - x2)**2 + (y1 - y2)**2 < (r1 + r2)**2:
+                y2 = value2[1]
+                r2 = value2[2]
+                # 由于浮点运算存在精度问题，所以设置 一个误差范围 1e-8
+                if (x1 - x2)**2 + (y1 - y2)**2 < ((r1 + r2)**2 - 1e-8):
                     return False
 
     # all good

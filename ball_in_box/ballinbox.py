@@ -1,32 +1,74 @@
 # -*- coding: utf-8 -*-
-import random
-from ball_in_box.validate import validate
+import math
+import sys
+import config
 
 __all__ = ['ball_in_box']
 
 
-def ball_in_box(m=5, blockers=[(0.5, 0.5), (0.5, -0.5), (0.5, 0.3)]):
+def prod_dots(xrange, yrange, percision):
     """
-    m is the number circles.
-    n is the list of coordinates of tiny blocks.
-    This returns a list of tuple, composed of x,y of the circle and r of the circle.
+        划分区域
     """
+    dots = []
+    interval = (xrange[1] - xrange[0]) * 1.0 / percision
+    y_num = int((yrange[1] - yrange[0]) / interval)
+    for i in range(1, percision):
+        for j in range(1, y_num):
+            dots.append((xrange[0] + i * interval, yrange[0] + j * interval))
 
-    # The following is an example implementation.
+    return dots
+
+
+def get_max_r(dot, xrange, yrange, blockers, circles):
+    """
+        获得最大的半径
+    """
+    r_list = []
+    r_list.append(abs(dot[0] - xrange[0]))
+    r_list.append(abs(dot[0] - xrange[1]))
+    r_list.append(abs(dot[1] - yrange[0]))
+    r_list.append(abs(dot[1] - yrange[1]))
+    for blocker in blockers:
+        d = math.sqrt((dot[0] - blocker[0])**2 + (dot[1] - blocker[1])**2)
+        r_list.append(d)
+
+    for circle in circles:
+        d = math.sqrt((dot[0] - circle[0])**2 +
+                      (dot[1] - circle[1])**2) - circle[2]
+        # 在其他圆内, 略过
+        if d <= 0:
+            return 0
+        r_list.append(d)
+
+    r = sys.maxsize
+    for item in r_list:
+        if item < r:
+            r = item
+    return r
+
+
+def ball_in_box(num_of_circle, blockers):
+    """
+        算法主体：贪心算法
+    """
+    xrange = config.XRANGE
+    yrange = config.YRANGE
+    percision = config.PERCISION
     circles = []
-    for circle_index in range(m):
+    dots = prod_dots(xrange, yrange, percision)
+    for i in range(num_of_circle):
+        temp_r = 0
+        circle = [0, 0, 0]
+        for dot in dots:
+            r = get_max_r(dot, xrange, yrange, blockers, circles)
+            if r > temp_r:
+                temp_r = r
+                circle[0] = dot[0]
+                circle[1] = dot[1]
+                circle[2] = temp_r
 
-        x = random.random() * 2 - 1
-        y = random.random() * 2 - 1
-        r = random.random() * 0.1
-
-        circles.append((x, y, r))
-        while not validate(circles, blockers):
-            x = random.random() * 2 - 1
-            y = random.random() * 2 - 1
-            r = random.random() * 0.1
-            circles[circle_index] = (x, y, r)
-
-        circle_index += 1
+        dots.remove((circle[0], circle[1]))
+        circles.append((circle[0], circle[1], circle[2]))
 
     return circles
