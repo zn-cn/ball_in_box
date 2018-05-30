@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
+from ball_in_box import config
 
 
-def validate(xrange, yrange, circles, blockers):
+def validate(circles, blockers):
+    xrange = config.XRANGE
+    yrange = config.YRANGE
     # Is circle in the box?
     for circle in circles:
         xmr = circle[0] - circle[2]
