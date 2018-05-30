@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import math
 import sys
+import config
 
 __all__ = ['ball_in_box']
 
@@ -47,10 +48,13 @@ def get_max_r(dot, xrange, yrange, blockers, circles):
     return r
 
 
-def ball_in_box(num_of_circle, blockers, xrange, yrange, percision):
+def ball_in_box(num_of_circle, blockers):
     """
         算法主体：贪心算法
     """
+    xrange = config.XRANGE
+    yrange = config.YRANGE
+    percision = config.PERCISION
     circles = []
     dots = prod_dots(xrange, yrange, percision)
     for i in range(num_of_circle):
