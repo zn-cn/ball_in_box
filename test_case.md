@@ -10,15 +10,24 @@ written by Jeffcoding
 May 30, 2018 10:00 PM
 
 _ _ _
-**This file describes one testing case of the program
-the contents are as follows:
-1.Prerequisites
-2.Input
-3.Operation method
-5.Actual output**
+**This file describes one testing case of the program,with fixed input of m and blockers.
+Detailed contents are as follows:**
+**1.Prerequisites**
+
+**2.Input**
+
+**3.Operation method**
+
+**4.Expected output**
+
+**5.Actual output**
+
+
 
 ####1.Prerequisites (Preset Conditions)：
+
 1.Running environment:Python 3.5
+
 2.Environment are settled correctly
 - number of Blockers:  2
 - settled box
