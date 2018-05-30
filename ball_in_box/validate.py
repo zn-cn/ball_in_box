@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import config
+from ball_in_box import config
 
 
 def validate(circles, blockers):

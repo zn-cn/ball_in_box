@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import math
 import sys
-import config
+from ball_in_box import config
 
 __all__ = ['ball_in_box']
 
