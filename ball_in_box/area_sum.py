@@ -2,17 +2,8 @@
 import math
 import ballinbox as bb
 import validate as val
-import random
-
-# 圈数
-NUM_OF_CIRCLE = 5
-# blockers 数量
-NUM_OF_BLOCKERS = 2
-# 精度
-PERCISION = 100
-# 范围
-XRANGE = (-1, 1)
-YRANGE = (-1, 1)
+# import random
+import config
 
 
 def area_sum(circles):
@@ -26,16 +17,16 @@ def area_sum(circles):
     return area
 
 
-def prod_blockers(num):
-    """
-        产生blockers
-    """
-    blockers = []
-    for i in range(num):
-        x = (XRANGE[1] - XRANGE[0]) * random.random() + XRANGE[0]
-        y = (YRANGE[1] - YRANGE[0]) * random.random() + YRANGE[0]
-        blockers.append((x, y))
-    return blockers
+# def prod_blockers(num):
+#     """
+#         产生blockers
+#     """
+#     blockers = []
+#     for i in range(num):
+#         x = (XRANGE[1] - XRANGE[0]) * random.random() + XRANGE[0]
+#         y = (YRANGE[1] - YRANGE[0]) * random.random() + YRANGE[0]
+#         blockers.append((x, y))
+#     return blockers
 
 
 def print_condition(num_of_blockers, xrange, yrange, blockers):
@@ -61,20 +52,20 @@ def print_circles(circles):
 
 if __name__ == '__main__':
     # 随机生成blockers
-    blockers = prod_blockers(NUM_OF_BLOCKERS)
-    # blockers = [(0.5, 0.5), (0.5, -0.3)]
-    # blockers = [(0.8, 0.6), (0.96, 0.1)]
-    # blockers =  [(0.5, -0.9), (0.4, -0.9), (-0.5, 0.9)]
-    print_condition(NUM_OF_BLOCKERS, XRANGE, YRANGE, blockers)
-    circles = bb.ball_in_box(NUM_OF_CIRCLE, blockers, XRANGE, YRANGE,
-                             PERCISION)
+    # blockers = prod_blockers(NUM_OF_BLOCKERS)
+    blockers = [(0.5, 0.5), (0.5, -0.3)]
+    num_of_blockers = config.NUM_OF_BLOCKERS
+    xrange = config.XRANGE
+    yrange = config.YRANGE
+    num_of_circle = config.NUM_OF_CIRCLE
+    print_condition(num_of_blockers, xrange, yrange, blockers)
+    circles = bb.ball_in_box(num_of_circle, blockers)
     print("circles: ")
     print_circles(circles)
 
     # 检测是否符合条件
-    if NUM_OF_CIRCLE == len(circles) and val.validate(XRANGE, YRANGE, circles,
-                                                      blockers):
+    if num_of_circle == len(circles) and val.validate(circles, blockers):
         area = area_sum(circles)
-        print("Total area: %10.6f" % (area))
+        print("Total area: {}".format(area))
     else:
         print("Error: no good circles.")
