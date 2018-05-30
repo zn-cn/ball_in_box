@@ -27,7 +27,7 @@ def validate(circles, blockers):
                 r = circle[2]
                 bx = block[0]
                 by = block[1]
-                # 由于浮点运算存在精度问题，所以设置 一个误差范围 1e-8
+                # Due to the precision problem of floating-number calculation,we set a deviation range : 1e-8
                 if (x - bx)**2 + (y - by)**2 < (r**2 - 1e-8):
                     return False
 
@@ -41,7 +41,7 @@ def validate(circles, blockers):
                 x2 = value2[0]
                 y2 = value2[1]
                 r2 = value2[2]
-                # 由于浮点运算存在精度问题，所以设置 一个误差范围 1e-8
+                # Due to the precision problem of floating-number calculation,we set a deviation range : 1e-8
                 if (x1 - x2)**2 + (y1 - y2)**2 < ((r1 + r2)**2 - 1e-8):
                     return False
 
