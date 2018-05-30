@@ -68,5 +68,5 @@ YRANGE:  (-1, 1)
 (x, y) -> (  0.792000,  -0.128000), r ->   0.208000
 
 - Total area = 2.953247890821777
-
+p.s. picture of actual output
 ![](http://chuantu.biz/t6/322/1527686475x-1376440102.jpg)
