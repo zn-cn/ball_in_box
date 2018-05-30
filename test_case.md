@@ -45,8 +45,11 @@ YRANGE:  (-1, 1)
  in this case, we just view them as a series of fixed values.(As written in preset conditions)
 
 ####3.Operation method
+
 1.Find the location of the program
+
 2.open the shell
+
 3.type "python3 area_sym.py"
  
 ####4.Expected output
@@ -55,10 +58,15 @@ YRANGE:  (-1, 1)
 ####5.Actual output
 - circles: 
 (x, y) -> ( -0.196000,   0.100000), r ->   0.802755
+
 (x, y) -> (  0.660000,  -0.660000), r ->   0.340000
+
 (x, y) -> (  0.708000,   0.712000), r ->   0.288000
+
 (x, y) -> ( -0.768000,  -0.768000), r ->   0.232000
+
 (x, y) -> (  0.792000,  -0.128000), r ->   0.208000
+
 - Total area = 2.953247890821777
 
 ![](http://chuantu.biz/t6/322/1527686475x-1376440102.jpg)
