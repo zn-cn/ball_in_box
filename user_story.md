@@ -1,6 +1,6 @@
 ﻿# user story
 
-标签（空格分隔）： ball_in_box
+tags: ball_in_box
 
 ## user stories
 
