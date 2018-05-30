@@ -8,7 +8,7 @@ from ball_in_box import config
 
 def area_sum(circles):
     """
-        计算面积
+        Calculating the area
     """
     area = 0.0
     for circle in circles:
@@ -19,7 +19,7 @@ def area_sum(circles):
 
 # def prod_blockers(num):
 #     """
-#         产生blockers
+#         Generating blockers
 #     """
 #     blockers = []
 #     for i in range(num):
@@ -31,7 +31,7 @@ def area_sum(circles):
 
 def print_condition(num_of_blockers, xrange, yrange, blockers):
     """
-        打印条件
+        Printing the condition
     """
     print("条件：")
     print("NUM_OF_BLOCKERS: ", num_of_blockers)
@@ -42,7 +42,7 @@ def print_condition(num_of_blockers, xrange, yrange, blockers):
 
 def print_circles(circles):
     """
-        打印圆
+        Printing the circles
     """
     for item in circles:
         print("(x, y) -> (%10.6f, %10.6f), r -> %10.6f" % (item[0], item[1],
@@ -51,7 +51,7 @@ def print_circles(circles):
 
 
 if __name__ == '__main__':
-    # 随机生成blockers
+    # Randomly generating the blockers
     # blockers = prod_blockers(NUM_OF_BLOCKERS)
     blockers = [(0.5, 0.5), (0.5, -0.3)]
     num_of_blockers = config.NUM_OF_BLOCKERS
@@ -63,7 +63,7 @@ if __name__ == '__main__':
     print("circles: ")
     print_circles(circles)
 
-    # 检测是否符合条件
+    # To determine whether or not to meet the conditions
     if num_of_circle == len(circles) and val.validate(circles, blockers):
         area = area_sum(circles)
         print("Total area: {}".format(area))
