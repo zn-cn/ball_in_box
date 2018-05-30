@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import math
-import ballinbox as bb
-import validate as val
+import ball_in_box.ballinbox as bb
+import ball_in_box.validate as val
 # import random
-import config
+from ball_in_box import config
 
 
 def area_sum(circles):
