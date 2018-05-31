@@ -8,7 +8,7 @@ __all__ = ['ball_in_box']
 
 def prod_dots(xrange, yrange, percision):
     """
-        划分区域
+        Divide areas
     """
     dots = []
     interval = (xrange[1] - xrange[0]) * 1.0 / percision
@@ -22,7 +22,7 @@ def prod_dots(xrange, yrange, percision):
 
 def get_max_r(dot, xrange, yrange, blockers, circles):
     """
-        获得最大的半径
+        Get the largest radius
     """
     r_list = []
     r_list.append(abs(dot[0] - xrange[0]))
@@ -36,7 +36,7 @@ def get_max_r(dot, xrange, yrange, blockers, circles):
     for circle in circles:
         d = math.sqrt((dot[0] - circle[0])**2 +
                       (dot[1] - circle[1])**2) - circle[2]
-        # 在其他圆内, 略过
+        # if in other circles, skip it
         if d <= 0:
             return 0
         r_list.append(d)
@@ -50,7 +50,7 @@ def get_max_r(dot, xrange, yrange, blockers, circles):
 
 def ball_in_box(num_of_circle, blockers):
     """
-        算法主体：贪心算法
+        Main body of algorithm: Greedy Algorithm
     """
     xrange = config.XRANGE
     yrange = config.YRANGE

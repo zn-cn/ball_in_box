@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-# 精度
+# precision
 PERCISION = 500
-# 圈数
+# the number of ballons
 NUM_OF_CIRCLE = 5
-# blockers 数量
+# the number of blockers
 NUM_OF_BLOCKERS = 2
-# 范围
+# the range of X-axis and Y-axis
 XRANGE = (-1, 1)
 YRANGE = (-1, 1)
