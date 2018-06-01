@@ -1,16 +1,16 @@
 ﻿# ball_in_box
 
 **Description Review**
->This program is used to solve a algorithm problem.
->The detailed description is that in a given box by [-1,1], given m balloons(they cannot overlap) with variable radio r and position mu, some tiny blocks  are in the box at given posiion {d}, which balloons cannot overlap with, we should find the optimal value of r nd mu which maxmizes sum r^2. 
+> This program is used to solve a algorithm problem.
+> The detailed description is that in a given box by [-1,1], given m balloons(they cannot overlap) with variable radio r and position mu, some tiny blocks  are in the box at given posiion {d}, which balloons cannot overlap with, we should find the optimal value of r nd mu which maxmizes sum r^2. 
 
 
-#Test Case
+# Test Case
 written by Jeffcoding
 May 30, 2018 10:00 PM
 
 _ _ _
-**This file describes one testing case of the program,with fixed input of m and blockers.
+**This file describes one testing case of the program, with fixed input of m and blockers.
 Detailed contents are as follows:**
 **1.Prerequisites**
 
@@ -24,7 +24,7 @@ Detailed contents are as follows:**
 
 
 
-####1.Prerequisites (Preset Conditions)：
+#### 1.Prerequisites (Preset Conditions)：
 
 1.Running environment:Python 3.5
 
@@ -40,11 +40,11 @@ YRANGE:  (-1, 1)
 3.the ``percision`` is small enough so as to workout an accurate value.
 
 
-####2.Input
+#### 2.Input
 - "m" , "number of Blockers" and blockers' location are actually virable, depending on user's input.
  in this case, we just view them as a series of fixed values.(As written in preset conditions)
 
-####3.Operation method
+#### 3.Operation method
 
 1.Find the location of the program
 
@@ -52,10 +52,10 @@ YRANGE:  (-1, 1)
 
 3.type "python3 area_sym.py"
  
-####4.Expected output
+#### 4.Expected output
 - Total area = 3
 
-####5.Actual output
+#### 5.Actual output
 - circles: 
 (x, y) -> ( -0.196000,   0.100000), r ->   0.802755
 
