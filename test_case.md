@@ -13,22 +13,16 @@ _ _ _
 **This file describes one testing case of the program, with fixed input of m and blockers.
 Detailed contents are as follows:**
 **1.Prerequisites**
-
 **2.Input**
-
 **3.Operation method**
-
 **4.Expected output**
-
 **5.Actual output**
-
-
 
 #### 1.Prerequisites (Preset Conditions)：
 
-1.Running environment:Python 3.5
+1.1 Running environment:Python 3.5
 
-2.Environment are settled correctly
+1.2 Environment are settled correctly
 - number of Blockers:  2
 - settled box
  - XRANGE:  (-1, 1)
@@ -37,7 +31,7 @@ YRANGE:  (-1, 1)
  - [(0.5, 0.5), (0.5, -0.3)] 
 - Number of circles: m = 5
 
-3.the ``percision`` is small enough so as to workout an accurate value.
+1.3 The ``percision`` is small enough so as to workout an accurate value.
 
 
 #### 2.Input
@@ -46,11 +40,11 @@ YRANGE:  (-1, 1)
 
 #### 3.Operation method
 
-1.Find the location of the program
+3.1 Find and enter the location of the program
 
-2.open the shell
+3.2 Open the shell
 
-3.type "python3 area_sym.py"
+3.3 Type "python3 area_sym.py" to run
  
 #### 4.Expected output
 - Total area = 3
