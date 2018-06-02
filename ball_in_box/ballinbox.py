@@ -1,74 +1,90 @@
 # -*- coding: utf-8 -*-
-import math
-import sys
+from itertools import combinations
+from scipy.optimize import fsolve
 from ball_in_box import config
+import copy
 
-__all__ = ['ball_in_box']
 
-
-def prod_dots(xrange, yrange, percision):
+def isvalid(circle, other_circle):
     """
-        Divide areas
+        Whether two circles do not intersect?
     """
-    dots = []
-    interval = (xrange[1] - xrange[0]) * 1.0 / percision
-    y_num = int((yrange[1] - yrange[0]) / interval)
-    for i in range(1, percision):
-        for j in range(1, y_num):
-            dots.append((xrange[0] + i * interval, yrange[0] + j * interval))
+    if other_circle[0] == config.BORDER:
+        return circle[0] + circle[2] <= 1.0
+    elif other_circle[0] == -config.BORDER:
+        return circle[0] - circle[2] >= -1.0
+    elif other_circle[1] == config.BORDER:
+        return circle[1] + circle[2] <= 1.0
+    elif other_circle[1] == -config.BORDER:
+        return circle[1] - circle[2] >= -1.0
+    else:
+        return (circle[2] + other_circle[2])**2 <= (
+            circle[0] - other_circle[0])**2 + (circle[1] - other_circle[1])**2
 
-    return dots
 
-
-def get_max_r(dot, xrange, yrange, blockers, circles):
+def validate(circle, circles):
     """
-        Get the largest radius
+        Is the verification condition established?
     """
-    r_list = []
-    r_list.append(abs(dot[0] - xrange[0]))
-    r_list.append(abs(dot[0] - xrange[1]))
-    r_list.append(abs(dot[1] - yrange[0]))
-    r_list.append(abs(dot[1] - yrange[1]))
-    for blocker in blockers:
-        d = math.sqrt((dot[0] - blocker[0])**2 + (dot[1] - blocker[1])**2)
-        r_list.append(d)
-
-    for circle in circles:
-        d = math.sqrt((dot[0] - circle[0])**2 +
-                      (dot[1] - circle[1])**2) - circle[2]
-        # if in other circles, skip it
-        if d <= 0:
-            return 0
-        r_list.append(d)
-
-    r = sys.maxsize
-    for item in r_list:
-        if item < r:
-            r = item
-    return r
+    for test_circle in circles:
+        if not isvalid(circle, test_circle):
+            return False
+    return True
 
 
-def ball_in_box(num_of_circle, blockers):
+# 解方程
+def solve_equations(three_conds, solution0):
     """
+        @param three_conds: List[set]
+        @param solution0: List or set
+        @res solve: List
+        Solving equations
+    """
+
+    def fi(solution0, cond):
+        """
+            Homogeneous equation
+        """
+        x, y, r = solution0
+        xi, yi, ri = cond
+        if xi == config.BORDER:
+            return x + r + config.XRANGE[0]
+        elif xi == -config.BORDER:
+            return x - r + config.XRANGE[1]
+        elif yi == config.BORDER:
+            return y + r + config.YRANGE[0]
+        elif yi == -config.BORDER:
+            return y - r + config.YRANGE[1]
+        else:
+            return (x - xi)**2 + (y - yi)**2 - (r + ri)**2
+
+    def f(x):
+        return [fi(x, cond) for cond in three_conds]
+
+    return fsolve(f, solution0)
+
+
+def ball_in_box(m, blockers):
+    """
+        @param m: int
+        @param blockers: List or set
+        @res circles: List
         Main body of algorithm: Greedy Algorithm
     """
-    xrange = config.XRANGE
-    yrange = config.YRANGE
-    percision = config.PERCISION
     circles = []
-    dots = prod_dots(xrange, yrange, percision)
-    for i in range(num_of_circle):
-        temp_r = 0
-        circle = [0, 0, 0]
-        for dot in dots:
-            r = get_max_r(dot, xrange, yrange, blockers, circles)
-            if r > temp_r:
-                temp_r = r
-                circle[0] = dot[0]
-                circle[1] = dot[1]
-                circle[2] = temp_r
+    conditions = copy.copy(config.CONDITIONS)
+    for blocker in blockers:
+        conditions.append((blocker[0], blocker[1], 0))
 
-        dots.remove((circle[0], circle[1]))
-        circles.append((circle[0], circle[1], circle[2]))
-
+    for i in range(m):
+        max_circle = [0, 0, 0]
+        for three_conds in combinations(conditions, 3):
+            solves = [[x, y, 0] for x in [-1, 1] for y in [-1, 1]]
+            for s in solves:
+                new_circle = solve_equations(three_conds, s)
+                if validate(new_circle,
+                            conditions) and new_circle[2] > max_circle[2]:
+                    max_circle = new_circle
+        conditions.append(max_circle)
+        circles.append(max_circle)
     return circles
